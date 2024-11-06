@@ -1,0 +1,49 @@
+.container {
+    display: flex; /* Make the container a flexbox */
+    margin-top: 2em;
+  }
+  
+  .card-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem; /* Adjust the gap between cards as needed */
+  }
+  
+  .editor-form {
+    width: 20%; /* Set the width of the edit form to 50% */
+    padding: 1rem; /* Add some padding for visual separation */
+  }
+  
+  .customer-card {
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .customer-card-header {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: Green
+  }
+  
+  .customer-card-body {
+    color: blue;
+  }
+  
+  .selected {
+    background-color: powderblue;
+    border: 3px solid #0be00b;
+  }
+
+  .customer-card-header,
+  .customer-card-body {
+    padding: 0.5rem; /* Add padding to the card content */
+  }
+
+  .footer {
+    padding: 0.5rem;
+    z-index: 1000;
+  }
