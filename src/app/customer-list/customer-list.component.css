@@ -26,16 +26,16 @@
     font-size: 1.2rem;
     font-weight: bold;
     margin-bottom: 0.5rem;
-    color: Green
+    color: black
   }
   
   .customer-card-body {
-    color: blue;
+    color: black;
   }
   
   .selected {
-    background-color: powderblue;
-    border: 3px solid #0be00b;
+    background-color: lightgray;
+    border: 3px solid whitesmoke;
   }
 
   .customer-card-header,

@@ -20,10 +20,10 @@
                         <p>Email: {{ customer.email }}</p>
                     </div>
                     <div class="customer-card-body">
-                        <p>Created: {{ customer.created | date }}</p>
+                        <p>Created: {{ customer.created | date: 'short'}}</p>
                     </div>
                     <div *ngIf="customer.updated" class="customer-card-body">
-                        <p>Updated: {{ customer.updated | date }}</p>
+                        <p>Updated: {{ customer.updated | date: 'short' }}</p>
                     </div>
                 </div>
                 <div *ngIf="selectedCustomer" class="footer">
