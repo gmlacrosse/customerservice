@@ -1,14 +1,15 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Customer } from '../customer.model';
-import { CustomerService } from '../customer.service';
+import { CustomerService } from '../services/customer.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-edit-customer',
   standalone: true,
   templateUrl: './edit-customer.component.html',
   styleUrls: ['./edit-customer.component.css'],
-  imports: [ReactiveFormsModule]
+  imports: [CommonModule, ReactiveFormsModule]
 })
 export class EditCustomerComponent implements OnInit {
   @Input() customer: Customer | null = null;
@@ -25,7 +26,6 @@ export class EditCustomerComponent implements OnInit {
         firstName: [this.customer.firstName, Validators.required],
         lastName: [this.customer.lastName, Validators.required],
         email: [this.customer.email, [Validators.required, Validators.email]]
-        // todo: add customer validator to check if email exists
       });
     }
   }
@@ -47,7 +47,6 @@ export class EditCustomerComponent implements OnInit {
   onSubmit() {
     if (this.customerForm?.valid) {
       const customer: Customer = this.customerForm.value;
-      customer.created = new Date();
       customer.updated = new Date();
       this.customerService.updateCustomer(customer).subscribe(
         (cust) => {

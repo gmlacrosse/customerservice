@@ -2,13 +2,14 @@
 
 import { Injectable } from '@angular/core';
 import { catchError, Observable, of } from 'rxjs';
-import { Customer } from './customer.model'
+import { Customer } from '../customer.model'
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CustomerService {
+
   /** Temporary mock service to simulate API Calls */
 
   // private customers: Customer[] = [{
@@ -148,9 +149,9 @@ export class CustomerService {
     const url = `${this.apiUrl}/${customer.id}`;
     let updatedCustomer = Object.assign({}, customer, { updated: new Date() }) as Customer;
     return this.http.put<Customer>(url, updatedCustomer, this.httpOptions)
-    .pipe(
-      catchError(this.handleError)
-    );
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   deleteCustomer(id: number): Observable<void> {
@@ -161,5 +162,10 @@ export class CustomerService {
   private handleError(error: any): Observable<any> {
     console.error('An error occurred', error);
     return of(error.message || error);
+  }
+
+  checkEmailExists(email: string): Observable<any> {
+    const url = `${this.apiUrl}/find/${email}`;
+    return this.http.get<Customer>(url, this.httpOptions)
   }
 }

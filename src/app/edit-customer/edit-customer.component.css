@@ -17,5 +17,7 @@ form {
     margin-top: 10px;
   }
   
-  /* edit-customer.component.css */
-  /* Same as add-customer.component.css */
+  .error {
+    color: red
+  }
+    

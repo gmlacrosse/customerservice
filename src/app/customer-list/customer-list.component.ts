@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Customer } from '../customer.model';
-import { CustomerService } from '../customer.service';
+import { CustomerService } from '../services/customer.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule, NgFor } from '@angular/common';
 import { AddCustomerComponent } from '../add-customer/add-customer.component';

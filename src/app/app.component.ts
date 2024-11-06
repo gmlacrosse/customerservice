@@ -3,7 +3,7 @@ import { CustomerListComponent } from './customer-list/customer-list.component';
 import { AddCustomerComponent } from './add-customer/add-customer.component';
 import { EditCustomerComponent } from './edit-customer/edit-customer.component';
 import { HttpClientModule } from '@angular/common/http';
-import { CustomerService } from './customer.service';
+import { CustomerService } from './services/customer.service';
 import { FormsModule } from '@angular/forms';
 
 @Component({
