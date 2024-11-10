@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   template: `<div class="container">
   <div class="input">
-      <input type="text" [(ngModel)]="searchText" (ngModelChange)="emitSearchTextChanged()">
+      <input type="text" [(ngModel)]="searchText" (ngModelChange)="emitSearchTextChanged()" placeholder="Search">
   </div>
 </div>`,
   styleUrls: ['./app-search-input.component.css'],
