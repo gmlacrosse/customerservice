@@ -1,6 +1,6 @@
 <section class="top">
     <h2>Customers</h2>
-    <app-search-input (searchTextChanged)="onSearch($event)"></app-search-input>
+    <app-search-input [searchText]="searchText" (searchTextChanged)="onSearch($event)"></app-search-input>
 </section>
 <section class="list">
     <div class="container">

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { Customer } from '../customer.model';
 import { CustomerService } from '../services/customer.service';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -20,7 +20,7 @@ export class CustomerListComponent implements OnInit {
   lastSelectedCustomerId: number | null = null;
   selectedCustomer: Customer | undefined;
   showAddCustomer: Boolean | null = null;
-
+  searchText = signal('');
   constructor(private customerService: CustomerService) { }
 
   OnUpdate($event: Customer) {
