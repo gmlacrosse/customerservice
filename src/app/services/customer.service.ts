@@ -10,7 +10,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class CustomerService {
 
-  private apiUrl = 'https://localhost:3000/api/Customers'; // Replace with your actual API endpoint
+  private apiUrl = 'https://localhost:3000/api/Customers';
   private httpOptions = {
     headers: new HttpHeaders({ 'accept': '*/*', 'Content-Type': 'application/json' })
   };

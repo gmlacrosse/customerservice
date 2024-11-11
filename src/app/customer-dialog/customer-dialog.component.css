@@ -22,13 +22,10 @@ button {
 
 .container {
     display: flex;
-    /* Make the container a flexbox */
     margin-top: 2em;
 }
 
 .editor-form {
     width: 30%;
-    /* Set the width of the edit form to 50% */
     padding: 1rem;
-    /* Add some padding for visual separation */
 }

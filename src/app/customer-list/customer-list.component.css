@@ -1,17 +1,17 @@
 .container {
-    display: flex; /* Make the container a flexbox */
+    display: flex;
     margin-top: 2em;
   }
   
   .card-list {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1rem; /* Adjust the gap between cards as needed */
+    gap: 1rem;
   }
   
   .editor-form {
-    width: 20%; /* Set the width of the edit form to 50% */
-    padding: 1rem; /* Add some padding for visual separation */
+    width: 20%;
+    padding: 1rem; 
   }
   
   .customer-card {
@@ -40,7 +40,7 @@
 
   .customer-card-header,
   .customer-card-body {
-    padding: 0.5rem; /* Add padding to the card content */
+    padding: 0.5rem; 
   }
 
   .footer {
