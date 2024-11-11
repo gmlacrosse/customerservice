@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { CustomerListComponent } from './customer-list/customer-list.component';
-import { AddCustomerComponent } from './add-customer/add-customer.component';
-import { EditCustomerComponent } from './edit-customer/edit-customer.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CustomerService } from './services/customer.service';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-root',
@@ -13,12 +13,13 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./app.component.css'],  
   imports: [
     CustomerListComponent,
-    AddCustomerComponent,
-    EditCustomerComponent,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatCardModule,
+    ReactiveFormsModule,
+    MatDialogModule
   ],
-  providers: [CustomerService]
+  providers: [CustomerService, HttpClient],
 })
 
 export class AppComponent {

@@ -1,45 +1,25 @@
 <section class="top">
-    <h2>Customers</h2>
-    <app-search-input [searchText]="searchText" (searchTextChanged)="onSearch($event)"></app-search-input>
+    <div class="container">
+        <app-search-input [searchText]="searchText" (searchTextChanged)="onSearch($event)"></app-search-input>
+        <div>
+            <button class="add-button" (click)="openAddDialog()">Add Customer</button>
+        </div>
+    </div>
 </section>
 <section class="list">
     <div class="container">
         <div class="card-list">
-            <div class="customer-card" (click)="ToggleShowAddCustomer()" [class.selected]="showAddCustomer">
-                <div class="customer-card-header">
-                    <H2><p>Add</p><p>Customer</p></H2>
-                </div>
-            </div>
             <div class="customer-card" *ngFor="let customer of filteredCustomers"
                 [class.selected]="customer.id === selectedCustomer?.id">
                 <div (click)="selectCustomer(customer)">
-                    <div class="customer-card-header">
-                        <h2>{{ customer.firstName }} {{ customer.lastName }}</h2>
-                    </div>
-                    <div class="customer-card-body">
-                        <p>Email: {{ customer.email }}</p>
-                    </div>
-                    <div class="customer-card-body">
-                        <p>Created: {{ customer.created | date: 'short'}}</p>
-                    </div>
-                    <div *ngIf="customer.updated" class="customer-card-body">
-                        <p>Updated: {{ customer.updated | date: 'short' }}</p>
-                    </div>
+                    <customer-card [customer]="customer"></customer-card>
                 </div>
                 <div *ngIf="selectedCustomer" class="footer">
+                    <button (click)="openEditDialog(selectedCustomer)">Edit</button>
+                    <span class="spacer"></span>
                     <button (click)="deleteCustomer(selectedCustomer)">Delete</button>
                 </div>
             </div>
-        </div>
-        <div class="editor-form">
-            <div *ngIf="showAddCustomer">
-                <app-add-customer (recordAdded)="OnAdd($event)"></app-add-customer>
-            </div>
-            <div *ngIf="selectedCustomer">
-                <app-edit-customer [customer]="selectedCustomer"
-                    (recordUpdated)="OnUpdate($event)"></app-edit-customer>
-            </div>
-
         </div>
     </div>
 </section>

@@ -1,0 +1,34 @@
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 5px;
+}
+
+input {
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+button {
+    margin-top: 10px;
+}
+
+.error {
+    color: red
+}
+
+.container {
+    display: flex;
+    /* Make the container a flexbox */
+    margin-top: 2em;
+}
+
+.editor-form {
+    width: 30%;
+    /* Set the width of the edit form to 50% */
+    padding: 1rem;
+    /* Add some padding for visual separation */
+}

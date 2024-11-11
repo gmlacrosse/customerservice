@@ -1,0 +1,14 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Customer Details</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <p>
+            <strong>First Name:</strong> {{ customer.firstName }}<br>
+            <strong>Last Name:</strong> {{ customer.lastName }}<br>
+            <strong>Email:</strong> {{ customer.email }}<br>
+            <strong>Date Created:</strong> {{ customer.created | date : 'mm/yy/dd hh:mm:ss a' }}<br>
+            <strong>Last Updated:</strong> {{ customer.updated | date : 'mm/yy/dd hh:mm:ss a' }}
+        </p>
+    </mat-card-content>
+</mat-card>

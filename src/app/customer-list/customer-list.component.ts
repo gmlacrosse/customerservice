@@ -3,51 +3,58 @@ import { Customer } from '../customer.model';
 import { CustomerService } from '../services/customer.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule, NgFor } from '@angular/common';
-import { AddCustomerComponent } from '../add-customer/add-customer.component';
-import { EditCustomerComponent } from '../edit-customer/edit-customer.component';
 import { SearchInputComponent } from '../app-search-input/app-search-input.component';
+import { CustomerComponent } from "../customer/customer.component";
+import { CustomerDialogComponent } from '../customer-dialog/customer-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-customer-list',
   standalone: true,
   templateUrl: './customer-list.component.html',
   styleUrls: ['./customer-list.component.css'],
-  imports: [ReactiveFormsModule, NgFor, CommonModule, AddCustomerComponent, EditCustomerComponent, SearchInputComponent]
+  imports: [ReactiveFormsModule, NgFor, CommonModule, SearchInputComponent, CustomerComponent, HttpClientModule]
 })
 export class CustomerListComponent implements OnInit {
   customers: Customer[] = [];
   filteredCustomers: Customer[] = [];
   lastSelectedCustomerId: number | null = null;
   selectedCustomer: Customer | undefined;
-  showAddCustomer: Boolean | null = null;
   searchText = signal('');
-  constructor(private customerService: CustomerService) { }
 
-  OnUpdate($event: Customer) {
-    this.customerService.getCustomers().subscribe(customers => {
-      this.customers = customers;
-      this.filteredCustomers = customers;
+  constructor(private customerService: CustomerService, private dialog: MatDialog) { }
 
-      // Restore the last selected customer from session storage
-      const lastSelectedId = sessionStorage.getItem('lastSelectedCustomerId');
-      if (lastSelectedId) {
-        this.lastSelectedCustomerId = +lastSelectedId;
+  openAddDialog() {
+    const dialogRef = this.dialog.open(CustomerDialogComponent, {
+      data: {}      
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.customers.push(result);
       }
     });
   }
 
-  OnAdd($event: Customer) {
-    this.customers.push($event);
-    this.filteredCustomers = this.customers;
-  }
+  openEditDialog(customer: Customer) {
+    const dialogRef = this.dialog.open(CustomerDialogComponent, {
+      data: { ...customer}, 
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        const index = this.customers.findIndex(c => c.id === customer.id);
+        this.customers[index] = result;
+      }
+    });
+  }
 
   ngOnInit() {
     this.customerService.getCustomers().subscribe(customers => {
       this.customers = customers;
       this.filteredCustomers = customers;
 
-      // Restore the last selected customer from session storage
       const lastSelectedId = sessionStorage.getItem('lastSelectedCustomerId');
       if (lastSelectedId) {
         this.lastSelectedCustomerId = +lastSelectedId;
@@ -57,7 +64,6 @@ export class CustomerListComponent implements OnInit {
 
 
   selectCustomer(customer: Customer): void {
-    this.showAddCustomer = null;
     this.selectedCustomer = customer;
     this.lastSelectedCustomerId = customer.id;
     sessionStorage.setItem('lastSelectedCustomerId', customer.id.toString());
@@ -65,9 +71,6 @@ export class CustomerListComponent implements OnInit {
 
   deleteCustomer(customer: Customer): void {
     this.customerService.deleteCustomer(customer.id).subscribe(() => {
-      // Handle success, e.g., display a success message
-
-      // Refresh the customer list after deleting a customer
       this.customerService.getCustomers().subscribe(customers => {
         this.customers = customers;
       });
@@ -75,7 +78,6 @@ export class CustomerListComponent implements OnInit {
     },
       error => {
         console.log(error);
-        // Handle error, e.g., display an error message
       })
     window.location.reload();
   }
@@ -91,10 +93,5 @@ export class CustomerListComponent implements OnInit {
 
         return null;
       });
-  }
-
-  ToggleShowAddCustomer(): void {
-    this.showAddCustomer = true;
-    this.selectedCustomer = null;
   }
 }
