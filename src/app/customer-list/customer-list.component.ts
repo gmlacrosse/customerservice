@@ -32,7 +32,7 @@ export class CustomerListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.customers.push(result);
+        this.Refresh();
       }
     });
   }
@@ -44,8 +44,7 @@ export class CustomerListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        const index = this.customers.findIndex(c => c.id === customer.id);
-        this.customers[index] = result;
+        this.Refresh();
       }
     });
   }
@@ -93,5 +92,17 @@ export class CustomerListComponent implements OnInit {
 
         return null;
       });
+  }
+
+  private Refresh(): void {
+    this.customerService.getCustomers().subscribe(customers => {
+      this.customers = customers;
+      this.filteredCustomers = customers;
+
+      const lastSelectedId = sessionStorage.getItem('lastSelectedCustomerId');
+      if (lastSelectedId) {
+        this.lastSelectedCustomerId = +lastSelectedId;
+      }
+    });
   }
 }

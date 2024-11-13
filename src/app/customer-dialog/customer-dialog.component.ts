@@ -61,6 +61,7 @@ export class CustomerDialogComponent implements OnInit {
             this.dialogRef.close(this.customerForm.value);
           },
           error => {
+            this.errorMessage = error;
             console.log(error);
           }
         );
@@ -71,6 +72,7 @@ export class CustomerDialogComponent implements OnInit {
             this.dialogRef.close(this.customerForm.value);
           },
           error => {
+            this.errorMessage = error;
             console.log(error);
           }
         );

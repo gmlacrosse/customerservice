@@ -1,7 +1,7 @@
 
 
 import { Injectable } from '@angular/core';
-import { catchError, Observable, of } from 'rxjs';
+import { catchError, Observable, of, throwError } from 'rxjs';
 import { Customer } from '../customer.model'
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -47,9 +47,10 @@ export class CustomerService {
     return this.http.delete<void>(url);
   }
 
-  private handleError(error: any): Observable<any> {
-    console.error('An error occurred', error);
-    return of(error.message || error);
+  private handleError(err: any): Observable<never> {
+    let errorMessage = `${err.error.message}`;
+    console.log(err);
+    return throwError(() => errorMessage)
   }
 
   checkEmailExists(email: string): Observable<any> {
