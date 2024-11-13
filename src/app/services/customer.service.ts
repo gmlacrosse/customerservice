@@ -50,19 +50,24 @@ export class CustomerService {
 
   deleteCustomer(id: number): Observable<void> {
     const url = `${this.apiUrl}/${id}`;
-    return this.http.delete<void>(url);
-  }
-
-  private handleError(err: any): Observable<never> {
-    let errorMessage = `${err.error.message}`;
-    console.log(err);
-    return throwError(() => errorMessage)
+    return this.http.delete<void>(url)
+    .pipe(
+      catchError(this.handleError)
+    );
   }
 
   findCustomerByEmail(email: string): Observable<any> {
     const url = `${this.apiUrl}/find/${email}`;
-    return this.http.get<Customer>(url, this.httpOptions).pipe(
+    return this.http.get<Customer>(url, this.httpOptions)
+    .pipe(
       catchError(this.handleError)
     );
+  }
+
+  // Error handling
+  private handleError(err: any): Observable<never> {
+    let errorMessage = `${err.error.message}`;
+    console.log(err);
+    return throwError(() => errorMessage)
   }
 }
