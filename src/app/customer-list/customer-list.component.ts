@@ -50,17 +50,8 @@ export class CustomerListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.customerService.getCustomers().subscribe(customers => {
-      this.customers = customers;
-      this.filteredCustomers = customers;
-
-      const lastSelectedId = sessionStorage.getItem('lastSelectedCustomerId');
-      if (lastSelectedId) {
-        this.lastSelectedCustomerId = +lastSelectedId;
-      }
-    });
+    this.Refresh();
   }
-
 
   selectCustomer(customer: Customer): void {
     this.selectedCustomer = customer;

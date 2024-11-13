@@ -18,19 +18,25 @@ export class CustomerService {
   constructor(private http: HttpClient) { }
 
   getCustomers(): Observable<Customer[]> {
-    return this.http.get<Customer[]>(this.apiUrl);
+    return this.http.get<Customer[]>(this.apiUrl)
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   getCustomerById(id: number): Observable<Customer> {
     const url = `${this.apiUrl}/${id}`;
-    return this.http.get<Customer>(url);
+    return this.http.get<Customer>(url)
+    .pipe(
+      catchError(this.handleError)
+    );
   }
 
   createCustomer(customer: Customer): Observable<Customer> {
     return this.http.post<Customer>(this.apiUrl, customer, this.httpOptions)
-    .pipe(
-      catchError(this.handleError)
-    );
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   updateCustomer(customer: Customer): Observable<any> {
@@ -53,8 +59,10 @@ export class CustomerService {
     return throwError(() => errorMessage)
   }
 
-  checkEmailExists(email: string): Observable<any> {
+  findCustomerByEmail(email: string): Observable<any> {
     const url = `${this.apiUrl}/find/${email}`;
-    return this.http.get<Customer>(url, this.httpOptions)
+    return this.http.get<Customer>(url, this.httpOptions).pipe(
+      catchError(this.handleError)
+    );
   }
 }

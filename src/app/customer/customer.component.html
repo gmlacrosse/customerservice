@@ -7,8 +7,8 @@
             <strong>First Name:</strong> {{ customer.firstName }}<br>
             <strong>Last Name:</strong> {{ customer.lastName }}<br>
             <strong>Email:</strong> {{ customer.email }}<br>
-            <strong>Date Created:</strong> {{ customer.created | date : 'mm/yy/dd hh:mm:ss a' }}<br>
-            <strong>Last Updated:</strong> {{ customer.updated | date : 'mm/yy/dd hh:mm:ss a' }}
+            <strong>Date Created:</strong> {{ customer.created | date : 'short' }}<br>
+            <strong>Last Updated:</strong> {{ customer.updated | date : 'short' }}
         </p>
     </mat-card-content>
 </mat-card>
